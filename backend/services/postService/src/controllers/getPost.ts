@@ -2,7 +2,7 @@ import { Request,Response } from "express";
 import Post from "../model/postModel";
 
 
-export const getPost = async(req: Request,res: Response)=>{
+export default async(req: Request,res: Response)=>{
     try {
         const postId = req.params.id
         const post  = await Post.findById(postId)

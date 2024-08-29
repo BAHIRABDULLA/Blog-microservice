@@ -6,10 +6,10 @@ import { Router,Request,Response } from "express";
 
 
 const router = Router()
-import { createPost } from "../controllers/createPost";
-import { getPost } from "../controllers/getPost";
-import { getAllPosts } from "../controllers/getAllPosts";
-import { updatePost } from "../controllers/updatePost";
+import  createPost  from "../controllers/createPost";
+import  getPost  from "../controllers/getPost";
+import  getAllPosts  from "../controllers/getAllPosts";
+import  updatePost  from "../controllers/updatePost";
 
 router.post('/createPost',createPost)
 router.get('/getAllPost',getAllPosts)

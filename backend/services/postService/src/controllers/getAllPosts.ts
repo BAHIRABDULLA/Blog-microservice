@@ -1,7 +1,7 @@
 import Post from "../model/postModel";
 import { Request,Response } from "express";
 
-export const getAllPosts = async (req:Request,res:Response)=>{
+export default async (req:Request,res:Response)=>{
     try {
         const posts = await Post.find()
     } catch (error) {

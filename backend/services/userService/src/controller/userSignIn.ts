@@ -5,7 +5,7 @@ import User from '../model/userModel';
 
 
 const JWT_SECRET = '_jwt_secret';
-export const userSignin = async (req: Request, res: Response) => {
+export default async (req: Request, res: Response) => {
     const { email, password } = req.body;
     try {
        

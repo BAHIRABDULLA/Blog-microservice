@@ -4,7 +4,7 @@ import User from "../model/userModel"
 
 
 
-export const userSignup = async (req: Request, res: Response) => {
+export default async (req: Request, res: Response) => {
     const { username, email, password } = req.body;
     
     try {

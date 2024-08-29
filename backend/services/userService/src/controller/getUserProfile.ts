@@ -1,7 +1,7 @@
 import { Request,Response } from "express";
 import User from "../model/userModel";
 
-export const getUserProfile = async (req: any, res: Response) => {
+export default async (req: any, res: Response) => {
     try {
         
         const user = await User.findById(req.userId); 

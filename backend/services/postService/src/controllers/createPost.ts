@@ -1,7 +1,7 @@
 import { Request,Response } from "express"
 import Post from "../model/postModel";
 
-export const createPost = async(req:Request,res:Response)=>{
+export default async(req:Request,res:Response)=>{
     try {
         const {title,content}= req.body
         const post = new Post({title,content})

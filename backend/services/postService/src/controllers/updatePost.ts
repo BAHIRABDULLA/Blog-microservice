@@ -1,9 +1,8 @@
 
 import { Request,Response } from "express";
-import mongoose from "mongoose";
 import Post from "../model/postModel";
 
-export const updatePost = async(req:Request,res:Response)=>{
+export default async(req:Request,res:Response)=>{
     try {
         const postId  = req.params.id
         const {title,content} = req.body
