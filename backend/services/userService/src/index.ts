@@ -1,5 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import userRoute from './routes/userRoute'
+
 
 import 'dotenv/config'
 
@@ -14,5 +16,6 @@ mongoose.connect('mongodb://localhost:27017/blogUser')
 .catch((err)=>{
     console.error('mongodb connection error');
 })
+app.use('/',userRoute)
 
 app.listen(5001,()=>console.log('server running on http://localhost:5001') )

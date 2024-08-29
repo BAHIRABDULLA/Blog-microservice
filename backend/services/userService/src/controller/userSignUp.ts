@@ -5,8 +5,11 @@ import User from "../model/userModel"
 
 
 export default async (req: Request, res: Response) => {
-    const { username, email, password } = req.body;
+
+    console.log('its here in sign up page');
     
+    const { name, email, password } = req.body;
+    console.log(name,'name',email,'email',password,'passowrd');
     try {
         
         const existingUser = await User.findOne({ email });
@@ -16,7 +19,7 @@ export default async (req: Request, res: Response) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new User({
-            username,
+            name,
             email,
             password: hashedPassword,
         });
