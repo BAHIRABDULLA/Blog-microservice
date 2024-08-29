@@ -8,10 +8,12 @@ import { Router,Request,Response } from "express";
 const router = Router()
 import { createPost } from "../controllers/createPost";
 import { getPost } from "../controllers/getPost";
-
+import { getAllPosts } from "../controllers/getAllPosts";
+import { updatePost } from "../controllers/updatePost";
 
 router.post('/createPost',createPost)
-router.get('/getPost',getPost)
-router.post('/updatePost',)
+router.get('/getAllPost',getAllPosts)
+router.get('/getPost/:id',getPost)
+router.post('/updatePost',updatePost)
 
 export default router
