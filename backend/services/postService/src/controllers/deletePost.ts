@@ -14,6 +14,7 @@ export default async(req:Request,res:Response)=>{
             return res.json({message:"you are unauthorized"})
         }
         await Post.findByIdAndDelete(id)
+        return res.status(200).json({message:"post deleted successfully"})
     } catch (error) {
         console.error('Error founded in delete post',error);
     }
