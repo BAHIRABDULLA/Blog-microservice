@@ -1,10 +1,9 @@
 import amqp,{Channel,Connection} from 'amqplib'
-import { Request, Response } from 'express';
 
 let channel: Channel
 let connection:Connection
 
-export const connectRabbitMQ = async (req: Request, res: Response) => {
+export const connectRabbitMQ = async () => {
     try {
         connection = await amqp.connect('amqp://localhost')
         console.log('rabbit mq connected');

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs'
 import User from "../model/userModel"
-
+import sendUserToQueue from '../events/rabbitmq/publisher/userPublisher';
 
 
 export default async (req: Request, res: Response) => {
@@ -25,6 +25,7 @@ export default async (req: Request, res: Response) => {
         });
 
         await newUser.save();
+        await sendUserToQueue(newUser)
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
         console.error('Error founded in user sign up ',error)
