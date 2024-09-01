@@ -1,13 +1,23 @@
-import { Request,Response } from "express"
-import Comment from "../model/commentModel"
+import Comment from "../model/commentModel";
+import { Request,Response } from "express";
 
-export default async(req:Request,res:Response)=>{
+export default async (req: Request, res: Response) => {
     try {
-        const commentId = req.params.id
-        const {comment}= req.body
-        const updateComment = await Comment.findByIdAndUpdate(commentId,{comment})
-        return res.json({message:"edit successfully"})
+        console.log('its herer');
+        
+        const { commentId } = req.params;
+        const { content } = req.body;
+        const userId = (req as any).userId;
+        console.log(commentId,'commentId ',  userId,'userId ', content,'content ');
+        
+        const comment = await Comment.findOne({ _id: commentId, userId });
+        if (!comment) return res.status(403).json({ success: false, message: 'Unauthorized' });
+
+        comment.content = content;
+        await comment.save();
+
+        res.status(200).json({ success: true, comment });
     } catch (error) {
-        console.error('Error founding on edit comment',error);
+        res.status(500).json({ success: false, message: 'Error editing comment', error });
     }
-}
+};

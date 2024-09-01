@@ -18,7 +18,13 @@ export default async (req: Request, res: Response) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
         const token = jwt.sign({ id: existingUser._id, email: existingUser.email }, JWT_SECRET, { expiresIn: '1h' });
-
+        console.log(token,'token in sign in ');
+        console.log('  ---------------     ');
+        console.log('req.headers_______',req.headers,'_______req.headers');
+        
+        console.log(req.headers.authorization,'req.headers.authorization .......');
+        
+        
         res.status(200).json({ token, user: existingUser });
     } catch (error) {
         console.error('Error founded in sign in ',error)

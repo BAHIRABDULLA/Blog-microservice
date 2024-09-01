@@ -7,7 +7,6 @@ export default async(req:Request,res:Response)=>{
         const {id}  = req.params
         const {title,content} = req.body
         const authorId = (req as any).userId
-
         const post = await Post.findById(id)
         if(!post){
             return res.json({message:'Post not found'})
@@ -15,8 +14,6 @@ export default async(req:Request,res:Response)=>{
         if(post?.author.toString()!==authorId){
             return res.json({message:'you are unauthorized'})
         }
-        
-
         const update = await Post.findByIdAndUpdate(id,{title,content})
         return res.json({message:"updation completed"})
     } catch (error) {
