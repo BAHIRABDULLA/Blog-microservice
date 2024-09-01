@@ -12,6 +12,7 @@ export const recieveUserFromQueue = async () => {
                 const messageContent = JSON.parse(msg.content.toString())
                 console.log('[x] recieved %s', messageContent);
                 const newUser = new User({
+                    _id:messageContent._id,
                     name:messageContent.name,
                     email:messageContent.email,
                     password:messageContent.password
