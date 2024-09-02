@@ -37,24 +37,25 @@ jobs:
         npm ci
         npm run build
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-
-    - name: Docker Build & Push User Service
+    - name: Build & Push User Service
       run: |
-        docker buildx build --platform linux/amd64 -t bahirk/blog-user:latest ./backend/services/userService --push
+        docker build -t bahirk/blog-user:latest ./backend/services/userService
+        docker push bahirk/blog-user:latest
 
-    - name: Docker Build & Push Post Service
+    - name: Build & Push Post Service
       run: |
-        docker buildx build --platform linux/amd64 -t bahirk/blog-post:latest ./backend/services/postService --push
+        docker build -t bahirk/blog-post:latest ./backend/services/postService
+        docker push bahirk/blog-post:latest
 
-    - name: Docker Build & Push Comment Service
+    - name: Build & Push Comment Service
       run: |
-        docker buildx build --platform linux/amd64 -t bahirk/blog-comment:latest ./backend/services/commentService --push
+        docker build -t bahirk/blog-comment:latest ./backend/services/commentService
+        docker push bahirk/blog-comment:latest
 
-    - name: Docker Build & Push API Gateway
+    - name: Build & Push API Gateway
       run: |
-        docker buildx build --platform linux/amd64 -t bahirk/blog-gateway:latest ./backend/gateway --push
+        docker build -t bahirk/blog-gateway:latest ./backend/gateway
+        docker push bahirk/blog-gateway:latest
 
     - name: Deploy to Docker Compose (Optional Step)
       run: |
