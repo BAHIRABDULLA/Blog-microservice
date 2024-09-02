@@ -57,6 +57,6 @@ jobs:
         docker build -t bahirk/blog-gateway:latest ./backend/gateway
         docker push bahirk/blog-gateway:latest
 
-    - name: Deploy to Docker Compose (Optional Step)
-      run: |
-        docker-compose -f docker-compose.yml up -d
+ #   - name: Deploy to Docker Compose (Optional Step)
+ #     run: |
+ #       docker-compose -f docker-compose.yml up -d
