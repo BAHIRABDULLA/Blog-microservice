@@ -1,0 +1,66 @@
+name: CI/CD for Microservices Blog Project
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+        ports:
+          - 2375:2375
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+
+    - name: Install Dependencies and Build Each Service
+      run: |
+        cd backend/services/userService
+        npm ci
+        npm run build
+        cd ../postService
+        npm ci
+        npm run build
+        cd ../commentService
+        npm ci
+        npm run build
+        cd ../../gateway
+        npm ci
+        npm run build
+
+    - name: Docker Build & Push User Service
+      run: |
+        docker build -t bahirk/blog-user:latest ./backend/services/userService
+        docker push bahirk/blog-user:latest
+
+    - name: Docker Build & Push Post Service
+      run: |
+        docker build -t bahirk/blog-post:latest ./backend/services/postService
+        docker push bahirk/blog-post:latest
+
+    - name: Docker Build & Push Comment Service
+      run: |
+        docker build -t bahirk/blog-comment:latest ./backend/services/commentService
+        docker push bahirk/blog-comment:latest
+
+    - name: Docker Build & Push API Gateway
+      run: |
+        docker build -t bahirk/blog-gateway:latest ./backend/gateway
+        docker push bahirk/blog-gateway:latest
+
+    - name: Deploy to Docker Compose (Optional Step)
+      run: |
+        docker-compose -f docker-compose.yml up -d
